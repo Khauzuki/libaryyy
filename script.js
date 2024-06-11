@@ -7,10 +7,6 @@ function Book(name) {
   this.author = author;
   this.pages = pages;
   this.read = this.read;
-
-  //this.info = function(){
-  //  return (this.title + this.author + ", " + this.pages)
-  //}
 }
 
 // Function to display library array to cards
@@ -31,6 +27,7 @@ function displayBookOnPage() {
   });
 }
 
+//
 //Function for adding book to the array
 function addBookToLibrary(title, author, pages, read) {
   let book = new Book(title, author, pages, read);
