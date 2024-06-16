@@ -1,43 +1,63 @@
-//Declare empty array for library
-const myLibrary = [];
+const myLibrary = []; // Declare empty array for library
 
-//Object constructor
-function Book(name) {
+function Book(title, author, pages, read) {
+  // Object constructor
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = this.read;
+  this.read = read;
 }
 
-// Function to display library array to cards
-function displayBookOnPage() {
-  const books = document.querySelector(".books");
+function addBookToLibrary(title, author, pages, read) {
+  // Function for adding book to the array
+  let book = new Book(title, author, pages, read);
+  myLibrary.push(book);
+}
 
-  // Loop over the library array and display to the cards
-  myLibrary.forEach((myLibrary) => {
+function displayBookOnPage() {
+  // Function to display library array to cards
+  const books = document.querySelector(".books");
+  myLibrary.forEach((book) => {
+    // Loop over the library array and display to the cards
     const card = document.createElement("div");
     card.classList.add("card");
     books.appendChild(card);
-    for (let key in myLibrary) {
-      console.log(`${key}: ${myLibrary[key]}`);
+    for (let key in book) {
+      console.log(`${key}: ${book[key]}`);
       const para = document.createElement("p");
-      para.textContent = `${key}: ${myLibrary[key]}`;
+      para.textContent = `${key}: ${book[key]}`;
       card.appendChild(para);
     }
   });
 }
 
-//
-//Function for adding book to the array
-function addBookToLibrary(title, author, pages, read) {
-  let book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-}
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read yet");
+addBookToLibrary(
+  "To Kill a Mockingbird",
+  "Harper Lee",
+  "281 pages",
+  "Not Read yet"
+);
+addBookToLibrary("1984", "George Orwell", "328 pages", "Not Read yet");
+addBookToLibrary(
+  "Pride and Prejudice",
+  "Jane Austen",
+  "279 pages",
+  "Not Read yet"
+);
+addBookToLibrary(
+  "The Great Gatsby",
+  "F. Scott Fitzgerald",
+  "180 pages",
+  "Not Read yet"
+);
+addBookToLibrary(
+  "The Catcher in the Rye",
+  "J.D. Salinger",
+  "277 pages",
+  "Not Read yet"
+);
 
-function createNewBook() {}
+console.log("End of code array contents", myLibrary);
 
-function removeBookFromLibrary() {}
-
-function changeBookStatus() {}
-
-console.log("hello");
+displayBookOnPage();
