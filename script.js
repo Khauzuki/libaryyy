@@ -1,7 +1,6 @@
-const myLibrary = []; // Declare empty array for library
+const myLibrary = [];
 
 function Book(title, author, pages, read) {
-  // Object constructor
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -9,14 +8,14 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(title, author, pages, read) {
-  // Function for adding book to the array
   let book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
 
 function displayBookOnPage() {
-  // Function to display library array to cards
   const books = document.querySelector(".books");
+  books.innerHTML = "";
+
   myLibrary.forEach((book) => {
     // Loop over the library array and display to the cards
     const card = document.createElement("div");
@@ -31,33 +30,45 @@ function displayBookOnPage() {
   });
 }
 
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read yet");
-addBookToLibrary(
-  "To Kill a Mockingbird",
-  "Harper Lee",
-  "281 pages",
-  "Not Read yet"
-);
-addBookToLibrary("1984", "George Orwell", "328 pages", "Not Read yet");
-addBookToLibrary(
-  "Pride and Prejudice",
-  "Jane Austen",
-  "279 pages",
-  "Not Read yet"
-);
-addBookToLibrary(
-  "The Great Gatsby",
-  "F. Scott Fitzgerald",
-  "180 pages",
-  "Not Read yet"
-);
-addBookToLibrary(
-  "The Catcher in the Rye",
-  "J.D. Salinger",
-  "277 pages",
-  "Not Read yet"
-);
+function handleFormSubmit(event) {
+  event.preventDefault();
 
-console.log("End of code array contents", myLibrary);
+  const form = event.target;
 
+  const title = form.title.value;
+  const author = form.author.value;
+  const pages = form.pages.value;
+  const read = form.read.checked;
+
+  bookFormContainer.style.display = "none";
+
+  addBookToLibrary(title, author, pages, read);
+  displayBookOnPage();
+
+  form.reset();
+}
+
+function handleAddBookButtonClick() {
+  const bookFormContainer = document.getElementById("bookFormContainer");
+
+  if (
+    bookFormContainer.style.display === "none" ||
+    bookFormContainer.style.display === ""
+  ) {
+    bookFormContainer.style.display = "grid";
+  } else {
+    bookFormContainer.style.display = "none";
+  }
+}
+
+const form = document.getElementById("bookForm");
+form.addEventListener("submit", handleFormSubmit);
+
+const addBookButton = document.getElementById("addBookButton");
+addBookButton.addEventListener("click", handleAddBookButtonClick);
+
+document.getElementById("bookFormContainer").style.display = "none";
+
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, false);
 displayBookOnPage();
